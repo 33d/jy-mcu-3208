@@ -1,0 +1,13 @@
+.project
+.settings
+.cproject
+*.o
+*.elf
+*.bin
+*.hex
+*.lst
+*.map
+*.srec
+*.swp
+/original.tar.gz
+
