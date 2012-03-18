@@ -1,8 +1,8 @@
-PROJECT	       = jyled
+PROJECT	       = demo
 
 PRG            = $(PROJECT)
 OBJECTS        = 
-AVR_OBJECTS    = $(PROJECT) 
+AVR_OBJECTS    = display effect ht1632c avrcpp $(PROJECT) 
 TEST_OBJECTS   = 
 
 ARDUINO_HOME  ?= /opt/arduino-0018
