@@ -18,10 +18,12 @@ public:
 
 class HScrollEffect: public Effect {
 private:
-    uint16_t delay;
+    const uint16_t delay;
+    const bool blankAtEnd;
 public:
     virtual void run(const char* text);
-    HScrollEffect(uint16_t delayms): delay(delayms) {}
+    HScrollEffect(uint16_t delayms, bool blankAtEnd = true)
+        : delay(delayms), blankAtEnd(blankAtEnd) {}
 };
 
 #endif /* EFFECT_H_ */

@@ -15,39 +15,28 @@ Effect::~Effect() {}
 
 void HScrollEffect::run(const char* text) {
     uint8_t textLength = ::strlen(text);
-    int8_t startPos = -1;
-    const struct Glyph* startGlyph = &startEndGlyph;
-    uint8_t startCharCol = 0;
+    // The length, including the blank space at the end (if requested)
+    uint8_t maxPos = blankAtEnd ? textLength + 1 : textLength;
+    uint8_t pos = 0;
+    const struct Glyph* glyph = &font[text[pos] - '0'];
+    uint8_t charCol = 0;
 
-    while (startPos < textLength) {
-        int8_t currentPos = startPos;
-        uint8_t currentCharCol = startCharCol;
-        const struct Glyph* glyph = startGlyph;
-        // Render a frame
-        for (uint8_t col = 0; col < 32; col++) {
-            // Is this column not before or after the text?
-            HTleds[col] = currentPos >= 0 && currentPos < textLength
-                ? glyph->data[currentCharCol]
-                : 0;
-            ++currentCharCol;
-            if (currentCharCol >= glyph->width) {
-                // go to the next character
-                ++currentPos;
-                char c = text[currentPos];
-                glyph = currentPos > textLength
-                    ? &startEndGlyph // the space at the end
-                    : &font[c - '0'];
-                currentCharCol = 0;
-            }
-        }
+    while (pos < maxPos) {
+        // Shift the memory
+        memmove(HTleds, HTleds + 1, 31);
+
+        // Render the last column
+        HTleds[31] = pos < textLength
+            ? glyph->data[charCol]
+            : 0;
 
         // Move the starting column
-        ++startCharCol;
-        if (startCharCol >= startGlyph->width) {
-            ++startPos;
-            startCharCol = 0;
-            startGlyph = startPos <= textLength
-                ? &font[text[startPos] - '0']
+        ++charCol;
+        if (charCol >= glyph->width) {
+            ++pos;
+            charCol = 0;
+            glyph = pos < textLength
+                ? &font[text[pos] - '0']
                 : &startEndGlyph;
         }
 
