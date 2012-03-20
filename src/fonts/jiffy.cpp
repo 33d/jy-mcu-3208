@@ -118,7 +118,7 @@ static const uint16_t offsets[] PROGMEM = {
     387, // ^
     393, // _
     399, // `
-    404, // a
+    403, // a
     409, // b
     415, // c
     420, // d
