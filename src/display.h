@@ -9,10 +9,12 @@
 #define DISPLAY_H_
 
 #include "effect.h"
+#include "font.h"
 
 class Display {
+    const Font& font;
 public:
-    Display();
+    Display(const Font& font);
     void show(const char* text, Effect& effect);
 };
 

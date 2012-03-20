@@ -1,21 +1,28 @@
+/*
+ * font.h
+ *
+ *  Created on: 20/03/2012
+ *      Author: damien
+ */
+
+#ifndef FONT_H_
+#define FONT_H_
+
 #include <stdint.h>
-#include <avr/pgmspace.h>
 
-struct Glyph {
-    const uint8_t width;
+/**
+ * A font.  This wraps the font data, and keeps the progmem stuff
+ * out of the rest of the code.
+ */
+class Font {
+    // These are pointers to flash, not RAM
+    const uint16_t* offsets;
     const uint8_t* data;
+public:
+    Font(const uint16_t* offsets, const uint8_t* data)
+        : offsets(offsets), data(data) {}
+    uint8_t char_width(char c) const;
+    uint8_t char_col(char c, uint8_t column) const;
 };
 
-const uint8_t _startEndData[] = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
-const struct Glyph startEndGlyph = {
-    32, _startEndData
-};
-
-const uint8_t _font_data[] = {
-    0x3e, 0x7f, 0x41, 0x41, 0x41, 0x7f, 0x3e, 0x00, 0x02, 0x7f, 0x7f, 0x00
-};
-
-const struct Glyph font[] = {
-    { 8, _font_data },
-    { 4, _font_data + 8 }
-};
+#endif /* FONT_H_ */

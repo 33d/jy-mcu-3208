@@ -10,7 +10,6 @@
 #include <avr/interrupt.h>
 #include <avr/sleep.h>
 #include <avr/eeprom.h>
-#include "font.h"
 #include "ht1632c.h"
 
 #define byte uint8_t

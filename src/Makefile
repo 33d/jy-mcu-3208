@@ -2,7 +2,7 @@ PROJECT	       = demo
 
 PRG            = $(PROJECT)
 OBJECTS        = 
-AVR_OBJECTS    = display effect ht1632c avrcpp $(PROJECT) 
+AVR_OBJECTS    = display effect ht1632c font fonts/jiffy avrcpp $(PROJECT) 
 TEST_OBJECTS   = 
 
 ARDUINO_HOME  ?= /opt/arduino-0018

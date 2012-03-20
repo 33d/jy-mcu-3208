@@ -8,7 +8,7 @@
 #include "display.h"
 #include "ht1632c.h"
 
-Display::Display() {
+Display::Display(const Font& font)  : font(font) {
     ::HTpinsetup();
     ::HTsetup();
 
@@ -16,5 +16,5 @@ Display::Display() {
 }
 
 void Display::show(const char* text, Effect& effect) {
-    effect.run(text);
+    effect.run(font, text);
 }
