@@ -14,8 +14,8 @@ bool LeftEffect::step() {
     uint8_t count = 0; // checks for overflows
     for (uint8_t p = 0; p < text.length(); p++) {
         for (uint8_t col = 0; col < font.char_width(text[p]); col++) {
-            display.buffer[++count] = font.char_col(text[p], col);
-            if (col >= 32)
+            display.buffer[count++] = font.char_col(text[p], col);
+            if (count >= 32)
                 return false;
         }
     }
