@@ -19,7 +19,7 @@ protected:
     Effect(Display& display): display(display) {};
 public:
     virtual bool step() = 0;
-    virtual ~Effect();
+    virtual ~Effect() {};
 };
 
 class TextEffect: public Effect {
@@ -30,18 +30,5 @@ protected:
         : Effect(display), font(font), text(text) {}
 };
 
-class HScrollEffect: public TextEffect {
-private:
-    const bool blankAtEnd;
-    uint8_t textLength;
-    uint8_t maxPos;
-    uint8_t pos;
-    uint8_t glyph_width;
-    uint8_t charCol;
-public:
-    HScrollEffect(Display& display, const Font& font, const char* text,
-            bool blankAtEnd);
-    virtual bool step();
-};
+#endif
 
-#endif /* EFFECT_H_ */

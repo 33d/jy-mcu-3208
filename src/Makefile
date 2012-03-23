@@ -2,7 +2,10 @@ PROJECT	       = demo
 
 PRG            = $(PROJECT)
 OBJECTS        = 
-AVR_OBJECTS    = display effect ht1632c runner font fonts/jiffy avrcpp $(PROJECT) 
+AVR_OBJECTS    = display ht1632c runner avrcpp \
+        effects/hscroll \
+        font fonts/jiffy \
+        $(PROJECT) 
 TEST_OBJECTS   = 
 
 ARDUINO_HOME  ?= /opt/arduino-0018
@@ -38,7 +41,7 @@ override AVRLDFLAGS       = -Wl,-Map,$(PRG).map
 AVROBJCOPY      = avr-objcopy
 OBJDUMP         = avr-objdump
 
-INCLUDES = 
+INCLUDES = -I.
 
 BUILD_DIR	= build
 TEST_DIR	= test

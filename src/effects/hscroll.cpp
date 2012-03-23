@@ -7,9 +7,7 @@
 
 #include <string.h> // should be <cstring>
 #include <util/delay.h>
-#include "effect.h"
-
-Effect::~Effect() {}
+#include "hscroll.h"
 
 HScrollEffect::HScrollEffect(Display& display, const Font& font, const char* text, bool blankAtEnd = true)
     : TextEffect(display, font, text), blankAtEnd(blankAtEnd), pos(0), charCol(0) {

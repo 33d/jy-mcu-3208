@@ -1,5 +1,5 @@
 #include "display.h"
-#include "effect.h"
+#include "effects/hscroll.h"
 #include "runner.h"
 #include "fonts/jiffy.h"
 
