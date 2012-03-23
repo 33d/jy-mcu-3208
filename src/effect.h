@@ -10,19 +10,27 @@
 
 #include <stdint.h>
 #include "font.h"
+#include "display.h"
 
 class Effect {
 protected:
-    const Font& font;
-    const char* text;
+    Display& display;
+protected:
+    Effect(Display& display): display(display) {};
 public:
-    Effect(const Font& font, const char* text)
-        : font(font), text(text) {}
     virtual bool step() = 0;
     virtual ~Effect();
 };
 
-class HScrollEffect: public Effect {
+class TextEffect: public Effect {
+protected:
+    const Font& font;
+    const char* text;
+    TextEffect(Display& display, const Font& font, const char* text)
+        : Effect(display), font(font), text(text) {}
+};
+
+class HScrollEffect: public TextEffect {
 private:
     const bool blankAtEnd;
     uint8_t textLength;
@@ -31,7 +39,7 @@ private:
     uint8_t glyph_width;
     uint8_t charCol;
 public:
-    HScrollEffect(const Font& font, const char* text,
+    HScrollEffect(Display& display, const Font& font, const char* text,
             bool blankAtEnd);
     virtual bool step();
 };

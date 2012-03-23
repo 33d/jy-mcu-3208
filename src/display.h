@@ -9,15 +9,12 @@
 #define DISPLAY_H_
 
 #include <stdint.h>
-#include "effect.h"
-#include "font.h"
 
 class Display {
-    uint16_t delay;
 public:
+    uint8_t* const buffer;
     Display();
-    void set_delay(uint8_t delay_ms);
-    void show(Effect& effect);
+    void update();
 };
 
 #endif /* DISPLAY_H_ */

@@ -5,15 +5,14 @@
  *      Author: damien
  */
 
-#include "ht1632c.h"
 #include <string.h> // should be <cstring>
 #include <util/delay.h>
 #include "effect.h"
 
 Effect::~Effect() {}
 
-HScrollEffect::HScrollEffect(const Font& font, const char* text, bool blankAtEnd = true)
-    : Effect(font, text), blankAtEnd(blankAtEnd), pos(0), charCol(0) {
+HScrollEffect::HScrollEffect(Display& display, const Font& font, const char* text, bool blankAtEnd = true)
+    : TextEffect(display, font, text), blankAtEnd(blankAtEnd), pos(0), charCol(0) {
     textLength = ::strlen(text);
     // The length, including the blank space at the end (if requested)
     maxPos = blankAtEnd ? textLength + 1 : textLength;
@@ -22,10 +21,10 @@ HScrollEffect::HScrollEffect(const Font& font, const char* text, bool blankAtEnd
 
 bool HScrollEffect::step() {
     // Shift the memory
-    memmove(HTleds, HTleds + 1, 31);
+    memmove(display.buffer, display.buffer + 1, 31);
 
     // Render the last column
-    HTleds[31] = pos < textLength
+    display.buffer[31] = pos < textLength
         ? font.char_col(text[pos], charCol)
         : 0;
 
