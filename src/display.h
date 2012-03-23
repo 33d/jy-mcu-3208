@@ -8,14 +8,16 @@
 #ifndef DISPLAY_H_
 #define DISPLAY_H_
 
+#include <stdint.h>
 #include "effect.h"
 #include "font.h"
 
 class Display {
-    const Font& font;
+    uint16_t delay;
 public:
-    Display(const Font& font);
-    void show(const char* text, Effect& effect);
+    Display();
+    void set_delay(uint8_t delay_ms);
+    void show(Effect& effect);
 };
 
 #endif /* DISPLAY_H_ */

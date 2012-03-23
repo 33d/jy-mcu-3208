@@ -12,19 +12,28 @@
 #include "font.h"
 
 class Effect {
+protected:
+    const Font& font;
+    const char* text;
 public:
-    virtual void run(const Font& font, const char* text) = 0;
+    Effect(const Font& font, const char* text)
+        : font(font), text(text) {}
+    virtual bool step() = 0;
     virtual ~Effect();
 };
 
 class HScrollEffect: public Effect {
 private:
-    const uint16_t delay;
     const bool blankAtEnd;
+    uint8_t textLength;
+    uint8_t maxPos;
+    uint8_t pos;
+    uint8_t glyph_width;
+    uint8_t charCol;
 public:
-    virtual void run(const Font& font, const char* text);
-    HScrollEffect(uint16_t delayms, bool blankAtEnd = true)
-        : delay(delayms), blankAtEnd(blankAtEnd) {}
+    HScrollEffect(const Font& font, const char* text,
+            bool blankAtEnd);
+    virtual bool step();
 };
 
 #endif /* EFFECT_H_ */

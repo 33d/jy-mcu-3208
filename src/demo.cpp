@@ -6,11 +6,12 @@ const char* text = "The quick brown fox jumps over the lazy dog $12.34 07:45";
 
 int main(void) {
 
-    Display display(font_jiffy);
-    HScrollEffect effect(30);
+    Display display;
 
     while (1) {
-        display.show(text, effect);
+        Effect* effect = new HScrollEffect(font_jiffy, text, true);
+        display.show(*effect);
+        delete effect;
     }
 
     return(0);
