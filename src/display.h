@@ -15,6 +15,7 @@ public:
     uint8_t* const buffer;
     Display();
     void update();
+    void clear();
 };
 
 #endif /* DISPLAY_H_ */

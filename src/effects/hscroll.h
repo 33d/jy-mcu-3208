@@ -16,13 +16,12 @@
 class HScrollEffect: public TextEffect {
 private:
     const bool blankAtEnd;
-    uint8_t textLength;
     uint8_t maxPos;
     uint8_t pos;
     uint8_t glyph_width;
     uint8_t charCol;
 public:
-    HScrollEffect(Display& display, const Font& font, const char* text,
+    HScrollEffect(Display& display, const Font& font, const PString& text,
             bool blankAtEnd);
     virtual bool step();
 };

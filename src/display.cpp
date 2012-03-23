@@ -8,6 +8,7 @@
 #include "display.h"
 #include "ht1632c.h"
 #include <util/delay_basic.h>
+#include <string.h>
 
 Display::Display(): buffer(HTleds) {
     ::HTpinsetup();
@@ -16,4 +17,8 @@ Display::Display(): buffer(HTleds) {
 
 void Display::update() {
     HTsendscreen();
+}
+
+void Display::clear() {
+    ::memset(buffer, 0, 32);
 }

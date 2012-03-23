@@ -11,6 +11,7 @@
 #include <stdint.h>
 #include "font.h"
 #include "display.h"
+#include "pstring.h"
 
 class Effect {
 protected:
@@ -25,8 +26,8 @@ public:
 class TextEffect: public Effect {
 protected:
     const Font& font;
-    const char* text;
-    TextEffect(Display& display, const Font& font, const char* text)
+    const PString& text;
+    TextEffect(Display& display, const Font& font, const PString& text)
         : Effect(display), font(font), text(text) {}
 };
 
