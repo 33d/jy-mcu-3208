@@ -1,12 +1,12 @@
 PROJECT	       = demo
 
 PRG            = $(PROJECT)
-OBJECTS        = 
+OBJECTS        = commands scriptparser
 AVR_OBJECTS    = display ht1632c runner scriptrunner avrcpp \
         effects/hscroll effects/left effects/bitmap \
         font fonts/jiffy \
         $(PROJECT) 
-TEST_OBJECTS   = 
+TEST_OBJECTS   = test commandstest scriptparsertest
 
 ARDUINO_HOME  ?= /opt/arduino-0018
 
@@ -21,7 +21,7 @@ OPTIMIZE       = -O2
 
 DEFS           = -DF_CPU=1000000L
 LIBS           = 
-TEST_LIBS      = -lcunit
+TEST_LIBS      = -lcppunit
 
 # You should not have to change anything below here.
 
@@ -49,6 +49,8 @@ BUILD_OBJS	= $(foreach OBJ,$(OBJECTS) $(AVR_OBJECTS),$(OBJ).avr.o)
 TEST_OBJS	= $(foreach OBJ,$(OBJECTS) $(TEST_OBJECTS),$(OBJ).o) test.o
 
 .PHONY: reset_arduino
+
+.PRECIOUS: test
 
 export CFLAGS CPPFLAGS F_CPU LDFLAGS ARDUINO_HOME CC CPP INCLUDES ARDUINO_CORE
 

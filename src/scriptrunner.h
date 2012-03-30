@@ -14,10 +14,9 @@
 class ScriptRunner {
 private:
     Runner& runner;
-    static uint8_t script[];
-    uint8_t* pos;
 public:
-    ScriptRunner(Runner& runner): runner(runner), pos(&script[0]) {};
+    uint8_t script[512];
+    ScriptRunner(Runner& runner): runner(runner) {};
     void run();
 };
 
