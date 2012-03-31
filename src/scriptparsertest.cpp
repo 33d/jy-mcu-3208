@@ -14,6 +14,7 @@ private:
     CPPUNIT_TEST(test_no_args);
     CPPUNIT_TEST(test_1_arg);
     CPPUNIT_TEST(test_rate);
+    CPPUNIT_TEST(test_sleep);
     CPPUNIT_TEST(test_2_commands);
     CPPUNIT_TEST_SUITE_END();
 
@@ -41,6 +42,13 @@ public:
     void test_rate() {
         uint8_t e1[] = { CODE_RATE, 18 };
         parse("rate 18", e1, sizeof(e1));
+    }
+
+    void test_sleep() {
+        uint8_t e1[] = { CODE_SLEEP, 0, 0 };
+        // The byte order depends on the platform
+        *((uint16_t*) &e1[1]) = 1000;
+        parse("sleep 1000", e1, sizeof(e1));
     }
 
     void test_2_commands() {
