@@ -28,8 +28,8 @@ void ScriptParser::process_command(char c) {
     if (current_command == 0)
         state = IGNORE; // command not found
     else {
+        *(script_pos++) = current_command->code;
         if (c == ' ') {
-            *(script_pos++) = current_command->code;
             buf_pos = buf;
             state = TEXT;
         } else
@@ -42,7 +42,10 @@ void ScriptParser::commit() {
     CommandParser parser = (CommandParser) current_command->parser;
     if (parser != 0)
         script_pos = parser(buf, script_pos);
-    *script_pos = CODE_END;
+
+    // reset for the next command
+    state = COMMAND;
+    buf_pos = buf;
 }
 
 void ScriptParser::parse(const char c) {
